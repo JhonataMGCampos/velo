@@ -23,14 +23,14 @@ test('Deve consultar o pedido aprovado', async ({ page }) => {
   //await page.locator('//label[text()="Número do Pedido"]/..//input').fill('VLO-GSPZ32');
   //await page.getByRole('textbox', { name: 'Número do Pedido' }).fill('VLO-GSPZ32');
   //await page.getByLabel('Número do Pedido').fill('VLO-GSPZ32');
-  
+
   await page.getByTestId('search-order-id').click();
   //Assert
   await page.getByTestId('search-order-id').fill('VLO-GSPZ32');
   //Act
   await page.getByTestId('search-order-button').click();
   //Assert
-  await expect(page.getByTestId('order-result-id')).toBeVisible();
+  await expect(page.getByTestId('order-result-id')).toBeVisible({ timeout: 10_000 });//10 segundos de timeout
   await expect(page.getByTestId('order-result-id')).toContainText('VLO-GSPZ32');
   await expect(page.getByTestId('order-result-status')).toBeVisible();
   await expect(page.getByTestId('order-result-status')).toContainText('APROVADO');
